@@ -4,8 +4,8 @@ import {
   RouterProvider,
   Outlet
 } from 'react-router-dom'
-import { createContext } from 'react'
-import React, { useReducer } from 'react'
+import React, { createContext } from 'react'
+import { useReducer } from 'react'
 
 import App from './App'
 import Header from './Header'
@@ -13,6 +13,37 @@ import Footer from './Footer'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
+
+const initialState = {
+  task: [],
+  error: null
+}
+
+const taskReducer = (state, action) => {
+  switch(action.type) {
+    case 'addTask':
+      return ( 
+      {
+        ...state,
+        task: [state.task,{name: action.name}],
+      }
+    )
+      default:
+      throw new Error ('Skill issue')
+  }
+}
+
+export const TaskContext = createContext()
+
+const TaskProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(taskReducer, initialState)
+
+  return (
+    <TaskContext.Provider value = {( state, dispatch)}>
+      {children}
+    </TaskContext.Provider>
+  )}
+
 function Layout() {
   return (
     <>
@@ -32,7 +63,8 @@ const router = createBrowserRouter([
     // loader: rootLoader,
     children: [
       {
-       
+        path: '/App',
+        element: <App />
       },
     ],
   },
@@ -40,7 +72,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
-    <RouterProvider router={router} />
+    <TaskProvider>
+      <RouterProvider router={router} />
+    </TaskProvider>
   </React.StrictMode>,
 )
