@@ -5,7 +5,10 @@ import {
 } from 'react-router-dom'
 import { createContext } from 'react'
 import React, { useReducer } from 'react'
+
 import App from './App'
+import Header from './Header'
+import Footer from './Footer'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
