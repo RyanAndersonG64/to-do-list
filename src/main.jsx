@@ -1,10 +1,11 @@
-import React, { useReducer } from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom'
 import { createContext } from 'react'
+import React, { useReducer } from 'react'
+import App from './App'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
