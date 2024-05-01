@@ -8,12 +8,23 @@ import { createContext } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
+function Layout() {
+  return (
+    <>
+      <Header />
+      <div id='page-content'>
+        <Outlet />
+      </div>
+      <Footer />
+    </>
+)
+}
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
-    loader: rootLoader,
+    element: <Layout />,
+    // loader: rootLoader,
     children: [
       {
        
