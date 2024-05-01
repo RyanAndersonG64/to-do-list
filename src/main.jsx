@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
   RouterProvider,
+  Outlet
 } from 'react-router-dom'
 import { createContext } from 'react'
 import React, { useReducer } from 'react'
