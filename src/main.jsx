@@ -28,7 +28,7 @@ const taskReducer = (state, action) => {
       return ( 
         {
           ...state,
-          tasks: [...state.tasks, {name: action.name, id: action.id}],
+          tasks: [...state.tasks, {name: action.name, id: action.id, status: 'incomplete', due: action.due.getTime()}],
         }
       )
       case 'deleteTask':
@@ -46,32 +46,28 @@ const taskReducer = (state, action) => {
                     ...task,
                     name: action.name,
                   }
-                  console.log('name = ', newTask.name)
-                  console.log('task after edit = ', task)
                   return newTask
                 } else {
-                  console.log('task after edit = ', task)
                   return task
                 }
               }
               )
             }
-      // case 'markComplete':
-      //   return {
-      //     tasks: state.tasks.map(task => {
-      //       if (task.id === action.id) {
-      //         const newTask = {
-      //           ...task,
-      //           status: action.status,
-      //         }
-
-      //         return newTask
-      //       } else {
-      //         return task
-      //       }
-      //     }
-      //     )
-      //   }
+      case 'markComplete':
+        return {
+          tasks: state.tasks.map(task => {
+            if (task.id === action.id) {
+              const newTask = {
+                ...task,
+                status: 'complete',
+              }
+              return newTask
+            } else {
+              return task
+            }
+          }
+          )
+        }
       default:
         throw new Error ('Skill issue')
   }
