@@ -14,7 +14,7 @@ import Footer from './Footer'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
-const initialState = () => {
+const initialState = () => { //retrieves task data from storage, or initializes empty tasks array if there is nothing in storage
   const storage = JSON.parse(localStorage.getItem('state'))
   return {
     tasks: storage?.tasks ? storage.tasks : [],
@@ -24,21 +24,21 @@ const initialState = () => {
 
 const taskReducer = (state, action) => {
   switch(action.type) {
-    case 'addTask':
+    case 'addTask': //adds new task to tasks array
       return ( 
         {
           ...state,
           tasks: [...state.tasks, {name: action.name, id: action.id, status: 'incomplete', due: action.due.getTime()}],
         }
       )
-      case 'deleteTask':
+      case 'deleteTask': //performs a filter to remove task whose ID corresponds to the div whose delete button was clicked
         return ( 
           {
             ...state,
             tasks: state.tasks.filter(task => task.id !== action.id)
           }
         )
-      case 'editTask':
+      case 'editTask': //performs a map which replaces edited task with a new one containing the new name, while all other tasks are returned with no change
             return {
               tasks: state.tasks.map(task => {
                 if (task.id === action.id) {
@@ -53,7 +53,7 @@ const taskReducer = (state, action) => {
               }
               )
             }
-      case 'markComplete':
+      case 'markComplete': //performs a map which changed the status of the completed task, while returning other tasks with no change
         return {
           tasks: state.tasks.map(task => {
             if (task.id === action.id) {
