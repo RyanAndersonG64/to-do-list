@@ -1,5 +1,7 @@
 #root {
-  max-width: 1280px;
+  width: auto;
+  background-image: linear-gradient(225deg, rgb(64, 64, 64), rgb(191, 191, 191));
+  height: 100vh;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -11,9 +13,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +26,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -33,6 +38,7 @@
   }
 }
 
+
 .card {
   padding: 2em;
 }
@@ -41,11 +47,34 @@
   color: #888;
 }
 
+.classField {
+  color: red;
+}
+
+#displayDiv {
+  background-color: lightgray;
+  width: fit-content;
+  height: auto;
+  padding: 1%;
+  margin: auto;
+}
+
 #addTask {
   margin-top: 1%;
   margin-left: 1%;
 }
 
-.classField {
-  color: red;
+.task {
+  margin-bottom: 2%;
 }
+
+.editTask,
+.deleteTask,
+.markComplete {
+  margin-right: 2px;
+}
+
+#datePicker:hover {
+  cursor: pointer;
+}
+
