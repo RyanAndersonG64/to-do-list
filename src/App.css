@@ -55,8 +55,10 @@
   background-color: lightgray;
   width: fit-content;
   height: auto;
+  max-height: 90vh;
   padding: 1%;
   margin: auto;
+  overflow-y: scroll;
 }
 
 #addTask {
