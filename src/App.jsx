@@ -69,8 +69,10 @@ function App() {
           {task.editEmoji || '✏️'}
         </button>
         <button className='deleteTask' onClick={() => {
-          dispatch({ type: 'deleteTask', name: taskName, id: task.id, status: task.status, due: task.due })
-        }  //deletes task corresponding to the delete button that was clicked
+          if (confirm('Are you sure you want to delete this task?') === true) {
+            dispatch({ type: 'deleteTask', name: taskName, id: task.id, status: task.status, due: task.due })
+          }  //deletes task corresponding to the delete button that was clicked
+        }
         }>
           🗑️
         </button>
