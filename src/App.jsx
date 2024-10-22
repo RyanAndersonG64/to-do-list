@@ -37,6 +37,11 @@ function App() {
     task.name = newName;
   };
 
+  const handleDueDateChange = (task, newDueDate) => {
+    // Update the task duedate locally when edited
+    task.due = newDueDate.getTime();
+  };
+
   useEffect(() => { //saves current state to local storage every time state is changed
     localStorage.setItem('state', JSON.stringify(state))
   }, [state])
@@ -53,7 +58,6 @@ function App() {
     }
 
     let newDate = new Date(task.due) //turns due date integer back into an object for display
-    console.log(newDate)
     return (
       <div className='task' key={task.id}>
         <input
@@ -63,7 +67,13 @@ function App() {
           onChange={(e) => handleTaskNameChange(task, e.target.value)}
         />
         &nbsp;
-        Due: {newDate.toDateString()}
+        Due:
+        <DatePicker id='datePicker' readOnly={!editStates[task.id]} selected={newDate.toDateString()} onChange={(dueDate) => handleDueDateChange(task, dueDate)} />
+        {/* <input
+          defaultValue={newDate.toDateString()}
+          readOnly={!editStates[task.id]}
+          onChange={(e) => handleDueDateChange(task, e.target.value)}
+        /> */}
         &nbsp;
         <button className='editTask' onClick={() => handleEditClick(task)}>
           {task.editEmoji || '✏️'}
@@ -83,6 +93,7 @@ function App() {
         }>
           ✅
         </button>
+        <br></br>
       </div>
     )
   })
@@ -107,8 +118,6 @@ function App() {
           <button className='addTask' onClick={() => {
             if (taskName !== '') { //prevents empty task from being added
               dispatch({ type: 'addTask', name: taskName, id: uuidv4(), status: 'incomplete', due: dueDate }) //adds task to be displayed
-              console.log('due = ', dueDate)
-              console.log('number = ', dueDate.getTime())
             }
             setTaskName('') //clears input field
           }
